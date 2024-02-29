@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PageController;
+use App\Http\Controllers\PhotoController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,9 +25,9 @@ Route::get('/', function () {
 
 
 //Practicum 1
-Route::get('/hello', function () { 
-    return 'Hello World'; 
-    }); 
+// Route::get('/hello', function () { 
+//     return 'Hello World'; 
+//     }); 
 
 Route::get('/world', function () { 
     return 'World'; 
@@ -45,10 +51,10 @@ Route::get('/posts/{post}/comments/{comment}', function
     return 'Pos ke-'.$postId." Komentar ke-: ".$commentId; 
     }); 
 
-Route::get('/articles/{id}', function 
-    ($articleId) { 
-    return 'Article page-'.$articleId; 
-    }); 
+// Route::get('/articles/{id}', function 
+//     ($articleId) { 
+//     return 'Article page-'.$articleId; 
+//     }); 
 
 //practicum 3
 Route::get('/user/{name?}', function ($name=null) { 
@@ -58,3 +64,31 @@ Route::get('/user/{name?}', function ($name=null) {
 Route::get('/user/{name?}', function ($name='John') { 
         return 'Nama saya '.$name; 
         });
+
+//Controller
+//Practicum 1
+// Route::get('/hello',[WelcomeController::class,'hello']); 
+
+// Route::get('/index',[PageController::class,'index']); 
+// Route::get('/about',[PageController::class,'about']); 
+// Route::get('/articles/{$id}',[PageController::class,'articles']); 
+
+//Modify the previous implementation with the concept of Single Action Controller. So for 
+//the final result obtained there will be HomeController, AboutController and 
+//ArticleController. Modifications are also the routes used.
+
+Route::get('/index',[HomeController::class,'index']); 
+Route::get('/about',[AboutController::class,'about']);
+Route::get('/articles/{id}', [ArticleController::class,'articles ']);
+ 
+
+//Resource Controller
+//Praktikum 1
+// Route::resource('photos', PhotoController::class); 
+
+// Route::resource('photos', PhotoController::class)->only([ 
+//     'index', 'show' 
+//     ]); 
+    Route::resource('photos', PhotoController::class)->except([ 
+    'create', 'store', 'update', 'destroy' 
+    ]); 
