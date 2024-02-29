@@ -92,3 +92,21 @@ Route::get('/articles/{id}', [ArticleController::class,'articles ']);
     Route::resource('photos', PhotoController::class)->except([ 
     'create', 'store', 'update', 'destroy' 
     ]); 
+
+
+//View
+//Practicum 1
+// Route::get('/greeting', function () { 
+//     return view('hello', ['name' => 'Ferin']); 
+//     }); 
+
+//View in directory 
+// Route::get('/greeting', function () { 
+//     return view('blog.hello', ['name' => 'Ferin']); 
+//     }); 
+
+//Displaying a view using a controller
+Route::get('/greeting', [WelcomeController::class, 
+'greeting']); 
+
+//Forward data to views
